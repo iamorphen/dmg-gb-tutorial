@@ -16,7 +16,7 @@ rgbfix -v build/character_writer.gb
 ```
 
 # License
-TODO
+MIT license; see LICENSE.md.
 
 # Disclaimers
 `include/cp437.asm` is a modified version of "IBMPC1.TXT" from the GALP (GameBoy Assembly Language Primer) resources. At the time of this writing, the resources can be [found here](http://www.devrs.com/gb/files/galp.zip).
