@@ -18,7 +18,7 @@ set_rom_header: MACRO
   DB $BB,$BB,$67,$63,$6E,$0E,$EC,$CC,$DD,$DC,$99,$9F,$BB,$B9,$33,$3E
 
   ; $134 - $142, game title, all uppercase
-  DB "CHAR WRITER",0,0,0,0
+  DB 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ; settable through rgbfix
 
   ; $143, hardware type ($80 = CGB, other = not CGB)
   DB 0
@@ -121,5 +121,4 @@ tile_copy_monochrome.check:
   ret
 
 POPS
-
 ENDC ; MEM_UTIL_ASM

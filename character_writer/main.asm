@@ -4,6 +4,7 @@ SECTION "DUMMY",ROM0[$00] ; dummy section to allow includes to PUSHS/POPS
 INCLUDE "include/cp437.asm"
 INCLUDE "include/hardware.asm"
 INCLUDE "include/mem_util.asm"
+INCLUDE "include/vid_util.asm"
 
 ; IRQ handlers
 SECTION "RST_00",ROM0[$00]
@@ -84,21 +85,14 @@ main:
   ld a, vBGPBlack << 6 | vBGPDarkGray << 4 | vBGPLightGray << 2 | vBGPWhite
   ld [rBGP], a
 
-  ; re-enable the LCD
-  ld a, fLCDDispEnable | fLCDWinTileMapSel9800 | fLCDWinDispDisable | fLCDBgWinTileDataSel8000 | fLCDBgTileMapDispSel9800 | fLCDSpriteSize8x8 | fLCDSpriteDispDisable | fLCDBgWinDispPriorityOn
+  ; re-enable LCD; usually done in two commands; expanded here for shorter lines
+  ld a, 0
+  or a, fLCDDispEnable | fLCDWinTileMapSel9800 | fLCDWinDispDisable
+  or a, fLCDBgWinTileDataSel8000 | fLCDBgTileMapDispSel9800 | fLCDSpriteSize8x8
+  or a, fLCDSpriteDispDisable | fLCDBgWinDispPriorityOn
   ld [rLCDC], a
 
   call spin
-
-; Waits for V-Blank period. V-Blank occurs when LY is in the range [144, 153].
-;
-; This routine only returns when LY is 144, though, to give the caller the
-; largest window of time before leaving the V-Blank period.
-wait_vblank_begin:
-  ld a, [rLY]
-  cp vVBlankBegin
-  jp nz, wait_vblank_begin
-  ret
 
 ; Loop forever.
 spin:
