@@ -6,34 +6,6 @@ INCLUDE "include/hardware.asm"
 INCLUDE "include/mem_util.asm"
 INCLUDE "include/vid_util.asm"
 
-; IRQ handlers
-SECTION "RST_00",ROM0[$00]
-  jp start
-SECTION "RST_08",ROM0[$08]
-  jp start
-SECTION "RST_10",ROM0[$10]
-  jp start
-SECTION "RST_18",ROM0[$18]
-  jp start
-SECTION "RST_20",ROM0[$20]
-  jp start
-SECTION "RST_28",ROM0[$28]
-  jp start
-SECTION "RST_30",ROM0[$30]
-  jp start
-SECTION "RST_38",ROM0[$38]
-  jp start
-SECTION "RST_40",ROM0[$40]
-  jp $100
-SECTION "RST_48",ROM0[$48]
-  jp start
-SECTION "RST_50",ROM0[$50]
-  jp start
-SECTION "RST_58",ROM0[$58]
-  jp start
-SECTION "RST_60",ROM0[$60]
-  jp start
-
 SECTION "START",ROM0[$100]
 start:
   nop
