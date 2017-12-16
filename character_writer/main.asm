@@ -40,6 +40,10 @@ main:
   ld [rSCY], a
   ld [rSCX], a
 
+  ; set the palette shades
+  ld a, vBGPBlack << 6 | vBGPDarkGray << 4 | vBGPLightGray << 2 | vBGPWhite
+  ld [rBGP], a
+
   ; clear the background
   ld a, [rTileDataTable8000] ; the NUL character
   ld l, a
@@ -52,10 +56,6 @@ main:
   ld de, rTileMapData9800 + vBGTileMapBytesPerRow * 8 + 5 ; 9th row, 5th column
   ld bc, 12
   call mem_copy
-
-  ; set the palette shades
-  ld a, vBGPBlack << 6 | vBGPDarkGray << 4 | vBGPLightGray << 2 | vBGPWhite
-  ld [rBGP], a
 
   ; re-enable LCD; usually done in two commands; expanded here for shorter lines
   ld a, 0
